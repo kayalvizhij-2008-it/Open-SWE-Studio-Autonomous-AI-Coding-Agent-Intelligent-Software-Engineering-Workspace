@@ -407,7 +407,8 @@ const config = defineConfig({
     // React Compiler via oxc-transform-react, the Rust port. Upstream still
     // marks it experimental; the fallback is `@rolldown/plugin-babel` with
     // plugin-react's `reactCompilerPreset()`, which runs the Babel compiler.
-    viteReact({ compiler: true }),
+    // Disabled by default on systems where oxc native memory allocation fails.
+    viteReact({ compiler: process.env.ENABLE_REACT_COMPILER === "true" }),
   ],
 })
 

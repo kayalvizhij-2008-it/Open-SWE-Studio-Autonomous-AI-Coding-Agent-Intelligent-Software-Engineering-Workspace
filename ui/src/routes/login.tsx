@@ -5,6 +5,7 @@ import { Button } from "@langchain/macaw-components/Button"
 import { Card } from "@langchain/macaw-components/Card"
 import { Skeleton } from "@langchain/macaw-components/Skeleton"
 import { Text } from "@langchain/macaw-components/Text"
+import FibreArc from "@/components/FibreArc"
 
 import { LogoMark } from "@/components/Branding"
 import { loginUrl } from "@/lib/api"
@@ -55,10 +56,26 @@ function Login() {
   }
 
   return (
-    <main className="flex min-h-svh items-center justify-center bg-surface-level-1 p-space-5">
+    <main className="relative flex min-h-svh items-center justify-center bg-[#0B0D12] p-space-5 overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+        <FibreArc
+          height="100%"
+          width="100%"
+          background="#0B0D12"
+          baseColor="#FF7548"
+          accentColor="#F5B66B"
+          highlight="#FFF4E7"
+          density={18}
+          speed={35}
+          direction={180}
+          bundle={{ comb: 150, curve: 350, spread: 260, thickness: 50 }}
+          interactive={false}
+        />
+        <div className="absolute inset-0 bg-radial from-transparent via-[#0B0D12]/60 to-[#0B0D12]" />
+      </div>
       <Card
         intent="plain"
-        className="flex w-full max-w-md flex-col gap-space-5 p-space-6 shadow-md"
+        className="relative z-10 flex w-full max-w-md flex-col gap-space-5 p-space-6 shadow-2xl border border-[#30313A] bg-[#141820]/95 backdrop-blur-md rounded-2xl"
       >
         <div className="flex flex-col items-center gap-space-3 text-center">
           <LogoMark alt={appDistribution.name} className="size-8" />

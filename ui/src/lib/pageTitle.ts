@@ -4,7 +4,7 @@ class AppDistribution {
   }
 
   get name(): string {
-    return "Robin"
+    return "Open SWE Studio"
   }
 }
 

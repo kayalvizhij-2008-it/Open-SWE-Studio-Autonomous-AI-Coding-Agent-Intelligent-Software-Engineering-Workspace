@@ -8,6 +8,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuTrigger,
 } from "@langchain/macaw-components/DropdownMenu"
+import { HouseIcon } from "@phosphor-icons/react/dist/ssr/House"
 import { DotsThreeIcon } from "@phosphor-icons/react/dist/ssr/DotsThree"
 import { GitPullRequestIcon } from "@phosphor-icons/react/dist/ssr/GitPullRequest"
 import { LightningIcon } from "@phosphor-icons/react/dist/ssr/Lightning"
@@ -80,6 +81,14 @@ export function SidebarNav({
 
   return (
     <nav className={cn("flex flex-col gap-0.5", className)}>
+      <Link
+        to="/"
+        onClick={onNavigate}
+        className={cn(ROW, "text-[#FF7548] hover:text-[#FF8A63] font-medium")}
+      >
+        <HouseIcon size={16} weight="fill" className="shrink-0 text-[#FF7548]" />
+        Overview
+      </Link>
       {items
         .filter((item) => !hidden.includes(item))
         .map((item) => (

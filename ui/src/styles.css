@@ -105,15 +105,30 @@ body.version-mismatch {
    and borders sit a step lower than Macaw's defaults. */
 html.dark,
 .dark[data-theme-scope] {
-    --bg-elevated: var(--neutral-200);
-    --bg-elevated-hover: var(--neutral-300);
-    --bg-user-message: var(--neutral-200);
-    --border-default: var(--neutral-300);
-    --border-subtle: var(--neutral-200);
+    --bg-elevated: #141820;
+    --bg-elevated-hover: #1B202A;
+    --bg-user-message: #141820;
+    --border-default: #30313A;
+    --border-subtle: #232630;
 }
 
 :root {
     --bg-user-message: var(--bg-surface-level-2);
+    /* Open SWE Studio Palette */
+    --studio-bg: #0B0D12;
+    --studio-surface-1: #141820;
+    --studio-surface-2: #1B202A;
+    --studio-surface-3: #222836;
+    --studio-primary: #FF7548;
+    --studio-primary-hover: #FF8A63;
+    --studio-primary-glow: rgba(255, 117, 72, 0.28);
+    --studio-secondary: #F5B66B;
+    --studio-success: #A8D96C;
+    --studio-text: #F4F0E8;
+    --studio-muted: #9A9DA6;
+    --studio-border: #30313A;
+    --studio-border-subtle: #20232D;
+
     /* Compact control geometry — keep semantic so chat controls, menus, and
        tooltips cannot quietly drift apart. */
     --control-radius: var(--radius-md);
@@ -129,6 +144,39 @@ html.dark,
   input:placeholder-shown::placeholder,
   textarea:placeholder-shown::placeholder {
     color: var(--text-secondary);
+  }
+
+  /* Studio specific utilities */
+  .studio-card {
+    background-color: var(--studio-surface-1);
+    border: 1px solid var(--studio-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-in-out;
+  }
+  .studio-card:hover {
+    border-color: rgba(255, 117, 72, 0.35);
+  }
+  .studio-card-elevated {
+    background-color: var(--studio-surface-2);
+    border: 1px solid var(--studio-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.65);
+  }
+  .studio-glow-btn {
+    background: linear-gradient(135deg, #FF7548 0%, #F56B3A 100%);
+    color: #0B0D12;
+    font-weight: 600;
+    box-shadow: 0 4px 20px -2px rgba(255, 117, 72, 0.45);
+    transition: all 0.2s ease;
+  }
+  .studio-glow-btn:hover {
+    background: linear-gradient(135deg, #FF8A63 0%, #FF7548 100%);
+    box-shadow: 0 6px 24px 0px rgba(255, 117, 72, 0.65);
+    transform: translateY(-1px);
+  }
+  .studio-glow-btn:active {
+    transform: translateY(0);
   }
 
   /* Menus are opaque: a translucent tint let page content bleed through. */

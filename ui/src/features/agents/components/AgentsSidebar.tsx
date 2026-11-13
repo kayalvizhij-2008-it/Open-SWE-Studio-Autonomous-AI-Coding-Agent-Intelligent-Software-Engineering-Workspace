@@ -748,10 +748,18 @@ export function AgentsSidebar({
         )}
       >
         <Link
-          to="/my-settings"
-          className="min-w-0 truncate font-heading text-lg font-semibold tracking-tight text-primary"
+          to="/"
+          className="flex items-center gap-2 min-w-0 font-heading text-base font-bold tracking-tight text-primary hover:text-[#FF7548] transition-colors"
         >
-          Robin
+          <span className="flex size-6 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF7548] to-[#F56B3A] p-1 shadow-sm">
+            <svg viewBox="0 0 24 24" fill="none" className="size-3.5 text-[#0B0D12]">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+          <span className="truncate">OPEN SWE <span className="font-normal text-xs text-[#9A9DA6]">Studio</span></span>
         </Link>
         <div className="flex shrink-0 items-center gap-space-1">
           <IconButton

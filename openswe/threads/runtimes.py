@@ -26,7 +26,11 @@ from langgraph_sdk import get_client
 from langgraph_sdk.client import LangGraphClient
 from langgraph_sdk.errors import NotFoundError
 from managed_deepagents._agent_auth import AgentAuth, AgentAuthContext
-from managed_deepagents._channels.binding import handler_threads_key
+try:
+    from managed_deepagents._channels.binding import handler_threads_key
+except (ImportError, AttributeError):
+    def handler_threads_key(channel_name: str) -> str:
+        return f"{channel_name}:handler-threads"
 from managed_deepagents._connections import (
     PLATFORM_API_URL_ENV,
     TRUSTED_BACKEND_PROVIDER,

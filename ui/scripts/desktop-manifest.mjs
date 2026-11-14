@@ -30,9 +30,16 @@ await writeFile(`${output}/ui.json.gz`, archive)
 
 // Images build without a git checkout or SOURCE_COMMIT; only a release needs
 // the descriptor, so a missing commit must not fail the dashboard build.
-const { commit } = JSON.parse(
-  await readFile(`${root}/open-swe-build-info.json`, "utf8")
-)
+let commit = null
+try {
+  const infoPath = `${root}/open-swe-build-info.json`
+  if (existsSync(infoPath)) {
+    const info = JSON.parse(await readFile(infoPath, "utf8"))
+    commit = info.commit
+  }
+} catch {
+  // optional build info
+}
 if (/^[a-f0-9]{40}$/.test(commit ?? "")) {
   await writeFile(
     `${output}/descriptor.json`,

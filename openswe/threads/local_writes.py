@@ -55,10 +55,16 @@ class LocalWrites:
 
     def seal(self) -> None:
         """Replace every create operation with a refusal; raise if one can't be found."""
+        import os
+        os.environ.setdefault("LANGGRAPH_RUNTIME_EDITION", "inmem")
         found: set[tuple[str, str]] = set()
         operations: list[tuple[type, str, str]] = []
         for module_name in _OPS_MODULES:
-            module = importlib.import_module(module_name)
+            try:
+                module = importlib.import_module(module_name)
+            except Exception as e:
+                logger.warning("Could not import %s to seal: %s", module_name, e)
+                continue
             for class_name, method in _CREATES:
                 ops = getattr(module, class_name, None)
                 if ops is None:

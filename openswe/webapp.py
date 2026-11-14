@@ -1,6 +1,7 @@
 """Compatibility entrypoint for the FastAPI application."""
 
 import os
+os.environ.setdefault("LANGGRAPH_RUNTIME_EDITION", "inmem")
 os.environ.setdefault("REDIS_URI", "redis://localhost:6379")
 os.environ.setdefault("REDIS_URI_CUSTOM", "")
 

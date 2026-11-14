@@ -14,7 +14,7 @@ services:
     plan: free
     branch: main
     buildCommand: pip install -e vendor/managed-deepagents-sdk/packages/pypi && pip install -e packages/runtime-api && pip install -e .
-    startCommand: uvicorn openswe.webapp:app --host 0.0.0.0 --port $PORT
+    startCommand: LANGGRAPH_RUNTIME_EDITION=inmem REDIS_URI=redis://localhost:6379 uvicorn openswe.webapp:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PORT
@@ -31,3 +31,5 @@ services:
         value: "production"
       - key: REDIS_URI
         value: "redis://localhost:6379"
+      - key: LANGGRAPH_RUNTIME_EDITION
+        value: "inmem"

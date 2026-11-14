@@ -1,6 +1,7 @@
 """FastAPI application composition."""
 
 import os
+os.environ.setdefault("LANGGRAPH_RUNTIME_EDITION", "inmem")
 os.environ.setdefault("REDIS_URI", "redis://localhost:6379")
 
 import logging

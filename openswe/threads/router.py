@@ -262,6 +262,7 @@ class ThreadRouter:
 
     def __init__(self, app: ASGIApp) -> None:
         import os
+        os.environ.setdefault("LANGGRAPH_RUNTIME_EDITION", "inmem")
         os.environ.setdefault("REDIS_URI", "redis://localhost:6379")
         os.environ.setdefault("REDIS_URI_CUSTOM", "")
         from langgraph_api.auth.middleware import auth_middleware

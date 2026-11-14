@@ -21,7 +21,7 @@ dependencies = [
     "langchain[mcp]>=1.4.10",
     "langgraph>=1.2.20",
     "markdownify>=1.2.3",
-    "markdown-it-py==4.2.0",
+    "markdown-it-py==4.3.0",
     "langchain-anthropic>=1.7.10",
     "langgraph-cli[inmem]>=0.4.40,<0.4.41",
     "langsmith>=0.14.17",
@@ -52,7 +52,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "ty==0.0.95",
+    "ty==0.0.101",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
     "pytest-xdist>=3.8.0",

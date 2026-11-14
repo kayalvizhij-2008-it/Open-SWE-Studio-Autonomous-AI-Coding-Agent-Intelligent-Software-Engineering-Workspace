@@ -81,6 +81,8 @@ _CREATE_CRON: Final = "/runs/crons"
 
 
 def _routed(scope: Scope) -> bool:
+    if scope.get("method") == "OPTIONS":
+        return False
     path: str = scope["path"]
     if _THREAD.match(path):
         return True
@@ -275,7 +277,12 @@ class ThreadRouter:
         )
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        if scope["type"] != "http" or Headers(scope=scope).get(LOCAL_HEADER) or not _routed(scope):
+        if (
+            scope["type"] != "http"
+            or scope.get("method") == "OPTIONS"
+            or Headers(scope=scope).get(LOCAL_HEADER)
+            or not _routed(scope)
+        ):
             await self.app(scope, receive, send)
             return
         await self._authenticated(scope, receive, send)

@@ -261,6 +261,9 @@ class ThreadRouter:
     """ASGI middleware answering thread calls from the index and routing runs by runtime."""
 
     def __init__(self, app: ASGIApp) -> None:
+        import os
+        os.environ.setdefault("REDIS_URI", "redis://localhost:6379")
+        os.environ.setdefault("REDIS_URI_CUSTOM", "")
         from langgraph_api.auth.middleware import auth_middleware
 
         self.app = app

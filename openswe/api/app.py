@@ -1,5 +1,8 @@
 """FastAPI application composition."""
 
+import os
+os.environ.setdefault("REDIS_URI", "redis://localhost:6379")
+
 import logging
 from collections.abc import AsyncIterator
 from contextlib import AsyncExitStack, asynccontextmanager

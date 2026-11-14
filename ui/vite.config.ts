@@ -365,10 +365,6 @@ const config = defineConfig({
               route: "/desktop-ui.json",
               handler: "./server/backend-proxy.ts",
             },
-            {
-              route: "/.well-known/apple-app-site-association",
-              handler: "./server/apple-app-site-association.ts",
-            },
             ...[
               ...DEPLOYED_PREFIXES,
               // A built server fronting the mock harness fronts its fake-SaaS and

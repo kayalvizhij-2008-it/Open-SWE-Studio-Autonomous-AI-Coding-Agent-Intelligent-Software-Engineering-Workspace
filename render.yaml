@@ -29,3 +29,5 @@ services:
         value: "kayalvizhij-2008-it"
       - key: OPENSWE_ENV
         value: "production"
+      - key: REDIS_URI
+        value: "redis://localhost:6379"

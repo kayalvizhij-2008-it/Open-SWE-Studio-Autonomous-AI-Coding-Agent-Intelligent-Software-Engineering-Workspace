@@ -359,7 +359,7 @@ const config = defineConfig({
       // a localhost default the handler deliberately refuses to have. Only the
       // prefixes a deployed dashboard fronts, since proxying `/static` would
       // shadow nitro's assets.
-      handlers: IS_PRODUCTION
+      handlers: !process.env.VERCEL && IS_PRODUCTION
         ? [
             {
               route: "/desktop-ui.json",

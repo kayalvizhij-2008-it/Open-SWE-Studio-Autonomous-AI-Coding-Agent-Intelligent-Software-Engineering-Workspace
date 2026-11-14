@@ -33,3 +33,9 @@ services:
         value: "redis://localhost:6379"
       - key: LANGGRAPH_RUNTIME_EDITION
         value: "inmem"
+      - key: DASHBOARD_BASE_URL
+        value: "https://open-swe-studio.vercel.app"
+      - key: DASHBOARD_API_BASE_URL
+        value: "https://openswe-studio-api.onrender.com"
+      - key: LANGGRAPH_URL
+        value: "https://openswe-studio-api.onrender.com"

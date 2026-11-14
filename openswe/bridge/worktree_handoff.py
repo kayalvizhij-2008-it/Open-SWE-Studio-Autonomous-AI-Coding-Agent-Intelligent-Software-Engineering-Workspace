@@ -38,7 +38,7 @@ async def worktree_handoff(
     )
     try:
         result = await backend.ahandoff_worktree(params)
-    except TimeoutError, SandboxUnreachableError:
+    except (TimeoutError, SandboxUnreachableError):
         logger.warning(
             "Worktree handoff went unconfirmed", extra={"agent_thread_id": thread_id}, exc_info=True
         )

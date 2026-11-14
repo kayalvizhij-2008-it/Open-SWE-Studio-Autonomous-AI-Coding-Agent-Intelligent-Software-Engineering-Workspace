@@ -75,7 +75,7 @@ class Repository(Base):
         try:
             async with GitHubClient.as_app(owner, name) as github:
                 info = await github.repo(owner, name).info()
-        except GitHubAppUnavailable, httpx2.HTTPError, ValueError:
+        except (GitHubAppUnavailable, httpx2.HTTPError, ValueError):
             logger.warning(
                 "Could not resolve repository default branch",
                 extra={"repo_full_name": full_name},

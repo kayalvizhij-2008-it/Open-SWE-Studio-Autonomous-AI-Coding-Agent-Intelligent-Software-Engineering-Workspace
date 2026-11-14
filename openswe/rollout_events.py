@@ -336,7 +336,7 @@ async def _rollout_skill_at_merge(owner: str, repo: str, sha: str) -> bool:
     try:
         async with GitHubClient.as_app(owner, repo) as github:
             body = await github.repo(owner, repo).raw_file(_ROLLOUT_SKILL, merge_sha)
-    except GitHubAppUnavailable, httpx2.HTTPError:
+    except (GitHubAppUnavailable, httpx2.HTTPError):
         logger.warning(
             "Skipping rollout question; rollout skill could not be read",
             extra={"repository": f"{owner}/{repo}"},

@@ -295,7 +295,7 @@ def _iso(value: object) -> str | None:
 def _uuid(value: str) -> uuid.UUID | None:
     try:
         return uuid.UUID(value)
-    except ValueError, AttributeError, TypeError:
+    except (ValueError, AttributeError, TypeError):
         return None
 
 

@@ -154,7 +154,7 @@ class _Retry:
     def _retry_after(response: httpx2.Response) -> float | None:
         try:
             return min(float(response.headers["Retry-After"]), _MAX_BACKOFF)
-        except KeyError, ValueError:
+        except (KeyError, ValueError):
             return None
 
 
@@ -758,7 +758,7 @@ class RepoClient:
             return False
         try:
             payload = await self.get(f"collaborators/{quote(login, safe='')}/permission")
-        except httpx2.HTTPError, ValueError:
+        except (httpx2.HTTPError, ValueError):
             logger.info(
                 "Could not verify repository permission; denying",
                 extra={"repo_full_name": self.full_name, "github_login": login},
@@ -773,7 +773,7 @@ class RepoClient:
             payload = await self.get(
                 "pulls", {"head": f"{self.owner}:{branch}", "state": "open", "per_page": "1"}
             )
-        except httpx2.HTTPError, ValueError:
+        except (httpx2.HTTPError, ValueError):
             logger.warning(
                 "Failed to find open PR for branch",
                 extra={"repo_full_name": self.full_name, "branch": branch},
@@ -1024,7 +1024,7 @@ class RepoClient:
                 workflow.check_suite_id: workflow
                 for workflow in map(_WorkflowRun.model_validate, payloads)
             }
-        except httpx2.HTTPError, ValueError:
+        except (httpx2.HTTPError, ValueError):
             logger.warning(
                 "Could not identify superseded check runs",
                 extra={"repo_full_name": self.full_name, "sha": sha},
@@ -1307,7 +1307,7 @@ async def read_result[T](read: Awaitable[T]) -> ReadResult[T]:
     except httpx2.TransportError:
         logger.warning("GitHub read transport failed", exc_info=True)
         return ReadResult(None, "transient")
-    except httpx2.HTTPError, ValueError:
+    except (httpx2.HTTPError, ValueError):
         logger.warning("GitHub read unavailable", exc_info=True)
         return ReadResult(None, "unavailable")
 
@@ -1316,7 +1316,7 @@ async def or_none[T](read: Awaitable[T]) -> T | None:
     """``read``'s answer, or ``None`` when GitHub could not give one."""
     try:
         return await read
-    except httpx2.HTTPError, ValueError:
+    except (httpx2.HTTPError, ValueError):
         return None
 
 

@@ -1,0 +1,31 @@
+databases:
+  - name: openswe-db
+    databaseName: openswe_db
+    user: openswe_db_user
+    region: oregon
+    plan: free
+    postgresMajorVersion: "16"
+
+services:
+  - type: web
+    name: openswe-studio-api
+    runtime: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: pip install -e packages/runtime-api && pip install -e .
+    startCommand: uvicorn openswe.webapp:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: POSTGRES_URI
+        fromDatabase:
+          name: openswe-db
+          property: connectionString
+      - key: DASHBOARD_ALLOWED_ORIGINS
+        value: "https://open-swe-studio.vercel.app,https://open-swe-studio-git-main-kayalvizhij-2008-its-projects.vercel.app"
+      - key: ALLOWED_GITHUB_USERS
+        value: "kayalvizhij-2008-it"
+      - key: OPENSWE_ENV
+        value: "production"

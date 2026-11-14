@@ -104,7 +104,7 @@ class ReviewerAvailability:
             return cls(None, away)
         try:
             return cls(ZoneInfo(name), away)
-        except ZoneInfoNotFoundError, ValueError:
+        except (ZoneInfoNotFoundError, ValueError):
             logger.warning(
                 "Unknown Slack timezone; treating the person as always on shift",
                 extra={"slack_user_id": user.slack_user_id, "slack_timezone": name},
@@ -256,7 +256,7 @@ async def _touched(repo: RepoClient, ref: str | None, files: list[ChangedFile]) 
                 commits = _COMMITS.validate_python(
                     await repo.commits(path=path, since=since, ref=ref)
                 )
-            except httpx2.HTTPError, ValueError, ValidationError:
+            except (httpx2.HTTPError, ValueError, ValidationError):
                 logger.warning(
                     "Could not read a changed file's history",
                     extra={"repository": repo.full_name, "path": path},

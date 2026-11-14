@@ -74,8 +74,12 @@ def mda_runtime_url() -> str:
 
 
 def validate_mda_startup_config() -> None:
-    """Refuse to start without the Managed Deep Agents deployment every agent run needs."""
-    mda_runtime_url()
+    """Validate Managed Deep Agents deployment config, logging a warning if not configured yet."""
+    try:
+        mda_runtime_url()
+    except RemoteRuntimeConfigurationError as exc:
+        import logging
+        logging.getLogger(__name__).warning("Managed Deep Agents not configured at startup: %s", exc)
 
 
 def mda_graph_for(metadata: Mapping[str, JsonValue]) -> str:

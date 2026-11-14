@@ -123,7 +123,7 @@ class ReviewQueue:
             async with self._gate:
                 try:
                     return self.user.id in await TentativeReviewers(request).user_ids()
-                except httpx2.HTTPError, GitHubError:
+                except (httpx2.HTTPError, GitHubError):
                     logger.warning(
                         "Could not work out a review request's tentative reviewers",
                         extra={"request_id": str(request.id)},
@@ -201,7 +201,7 @@ class ReviewQueue:
         pull = self.github.repo(queued.ref.owner, queued.ref.repo).pull_request(queued.ref.number)
         try:
             payload = await pull.pull()
-        except GitHubError, httpx2.HTTPError, ValueError:
+        except (GitHubError, httpx2.HTTPError, ValueError):
             logger.warning(
                 "Could not read a mentioned pull request",
                 extra={"pr_url": queued.ref.url},

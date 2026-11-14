@@ -47,7 +47,7 @@ def required_slack_value(variable: EnvVar) -> str:
 
 
 def validate_slack_startup_config() -> None:
-    """Refuse to start without the Slack app every deployment needs."""
+    """Validate Slack app credentials, logging a warning if not configured yet."""
     for variable in (
         ENV.SLACK_BOT_TOKEN,
         ENV.SLACK_SIGNING_SECRET,
@@ -55,7 +55,11 @@ def validate_slack_startup_config() -> None:
         ENV.SLACK_BOT_USER_ID,
         ENV.SLACK_BOT_USERNAME,
     ):
-        required_slack_value(variable)
+        try:
+            required_slack_value(variable)
+        except SlackConfigurationError as exc:
+            _SDK_LOGGER.warning("Slack integration not configured at startup: %s", exc)
+            break
 
 
 class SlackRequestError(RuntimeError):

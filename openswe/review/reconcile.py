@@ -171,7 +171,7 @@ async def reconcile_linked_findings(
         return findings
     try:
         states = await pull.review_thread_states()
-    except httpx2.HTTPError, ValueError:
+    except (httpx2.HTTPError, ValueError):
         logger.warning(
             "Could not reconcile GitHub finding threads",
             extra={"reviewer_thread_id": reviewer_thread_id},

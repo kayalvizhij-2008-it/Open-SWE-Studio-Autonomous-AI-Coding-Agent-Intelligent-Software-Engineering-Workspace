@@ -46,7 +46,7 @@ async def fetch_head(
             response = await github_request(client, "GET", url)
             response.raise_for_status()
         return PullRequestHead.model_validate_json(response.content)
-    except httpx2.HTTPError, ValidationError:
+    except (httpx2.HTTPError, ValidationError):
         logger.exception(
             "Could not fetch the pull request for the review guide",
             extra={"pr_repo_full_name": f"{owner}/{repo}", "pr_number": number},

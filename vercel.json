@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "pnpm --filter open-swe-dashboard run build",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "cleanUrls": true
+}

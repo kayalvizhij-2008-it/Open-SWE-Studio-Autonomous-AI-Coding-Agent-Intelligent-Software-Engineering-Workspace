@@ -239,7 +239,7 @@ async def finish_scout_plan(
     except PlanMovedError:
         logger.info("Review scout head is stale; leaving the plan to the newer head", extra=extra)
         return
-    except CheckoutError, PlannerUnavailableError:
+    except (CheckoutError, PlannerUnavailableError):
         logger.exception("Review scout could not finish its plan", extra=extra)
         return
     if human_input_summary:

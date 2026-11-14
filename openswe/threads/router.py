@@ -217,7 +217,7 @@ async def _channel_write(
         return ChannelWrite()
     try:
         return await RUNTIMES.mda_runtime.channel_write(thread.thread_id, user_id=user_id)
-    except ChannelThreadError, httpx.HTTPError:
+    except (ChannelThreadError, httpx.HTTPError):
         logger.warning(
             "Can't act on an MDA channel's thread",
             extra={"thread_id": thread.thread_id},

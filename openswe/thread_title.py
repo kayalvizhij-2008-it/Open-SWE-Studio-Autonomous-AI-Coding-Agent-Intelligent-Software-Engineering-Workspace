@@ -123,7 +123,7 @@ async def generate_and_store_thread_title(
         try:
             structured = model.with_structured_output(_ThreadTitle)
             result = await structured.ainvoke(messages, config=config)
-        except OutputParserException, ValidationError:
+        except (OutputParserException, ValidationError):
             logger.warning(
                 "Thread title extraction failed; retrying as text",
                 extra={"thread_id": thread_id},

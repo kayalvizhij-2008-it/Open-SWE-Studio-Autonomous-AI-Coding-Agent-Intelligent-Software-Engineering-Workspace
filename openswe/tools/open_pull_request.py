@@ -104,7 +104,7 @@ async def _requester_grant(login: str) -> str | None:
     try:
         async with GitHubClient.connect(token=token) as github:
             granted = await github.viewer_login()
-    except httpx2.HTTPError, ValueError:
+    except (httpx2.HTTPError, ValueError):
         logger.warning(
             "Could not read whose GitHub grant the run carries; using the requester's sign-in",
             extra={"github_login": login},

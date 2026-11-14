@@ -216,7 +216,7 @@ async def _review_author_allowed(author: str, owner: str, repo: str) -> bool | N
     try:
         async with GitHubClient.as_app(owner, repo) as github:
             settings = await RepoSettings.fetch(github.repo(owner, repo), strict=True)
-    except GitHubAppUnavailable, RepoFileUnreadableError:
+    except (GitHubAppUnavailable, RepoFileUnreadableError):
         logger.exception("Could not read review author allow-list")
         return None
     return bool(author) and author.lower() in {
@@ -249,7 +249,7 @@ async def target_channel(
         settings = await RepoSettings.cached(pr_ref.owner, pr_ref.repo)
         try:
             configured = await settings.channel_for_pr(pull)
-        except httpx2.HTTPError, ValueError:
+        except (httpx2.HTTPError, ValueError):
             logger.exception("Could not resolve review channel from changed files")
             return _failure(
                 "Could not read the complete changed-file list for review channel routing."

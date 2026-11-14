@@ -93,7 +93,7 @@ class SlackRetry(BaseModel):
             return cls.model_validate(
                 jwt.decode(token, secret, algorithms=["HS256"], audience=BUTTON_TYPE)
             )
-        except jwt.InvalidTokenError, ValidationError:
+        except (jwt.InvalidTokenError, ValidationError):
             logger.warning("Invalid or expired Slack retry button", exc_info=True)
             return None
 

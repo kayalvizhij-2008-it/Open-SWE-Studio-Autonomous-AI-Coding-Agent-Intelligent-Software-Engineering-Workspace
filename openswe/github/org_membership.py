@@ -74,7 +74,7 @@ class Org:
         try:
             async with GitHubClient.as_app(self.name, permissions=self.MEMBERS_READ) as github:
                 return await github.team_members(self.name, team_slug)
-        except GitHubAppUnavailable, httpx2.HTTPError, ValueError:
+        except (GitHubAppUnavailable, httpx2.HTTPError, ValueError):
             logger.warning(
                 "Could not read team members",
                 extra={"github_org": self.name, "github_team": team_slug},

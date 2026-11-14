@@ -59,14 +59,24 @@ export function StudioHeader() {
           </span>
         </div>
 
-        {/* Right: Sub-descriptor */}
-        <div className="hidden md:flex flex-col text-right">
-          <span className="text-xs font-medium text-[#F4F0E8]">
-            From Ideas to Pull Requests
-          </span>
-          <span className="text-[11px] text-[#9A9DA6]">
-            with the Power of AI Agents.
-          </span>
+        {/* Right: Sub-descriptor and Live Status */}
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex flex-col text-right">
+            <span className="text-xs font-medium text-[#F4F0E8]">
+              From Ideas to Pull Requests
+            </span>
+            <span className="text-[11px] text-[#9A9DA6]">
+              with the Power of AI Agents.
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5 rounded-full border border-[#30313A] bg-[#141820]/90 px-2.5 py-1 text-[11px] font-medium text-[#F4F0E8] shadow-sm">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#A8D96C] opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-[#A8D96C]" />
+            </span>
+            <span className="text-[#A8D96C]">API Online</span>
+          </div>
         </div>
       </div>
     </header>

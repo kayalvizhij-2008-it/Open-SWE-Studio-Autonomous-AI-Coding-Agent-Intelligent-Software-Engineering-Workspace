@@ -562,7 +562,7 @@ class SessionMirror:
             async with GitHubClient.as_user(login) as github:
                 payload = await github.repo(ref.owner, ref.repo).pull_request(ref.number).pull()
             pull = _PullRequestPayload.model_validate(payload)
-        except HTTPException, GitHubError, ValidationError:
+        except (HTTPException, GitHubError, ValidationError):
             logger.warning(
                 "Could not read a mirrored Claude Code session's pull request",
                 extra={"thread_id": self.thread_id, "pr_url": url},

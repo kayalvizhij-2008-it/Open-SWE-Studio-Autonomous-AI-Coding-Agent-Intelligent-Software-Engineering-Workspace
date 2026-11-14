@@ -61,7 +61,7 @@ class SettingsRecords:
                 for entry in entries if isinstance(entries, list) else []:
                     try:
                         found.add(UUID(str(entry["release"])))
-                    except KeyError, TypeError, ValueError:
+                    except (KeyError, TypeError, ValueError):
                         continue
         return frozenset(found)
 

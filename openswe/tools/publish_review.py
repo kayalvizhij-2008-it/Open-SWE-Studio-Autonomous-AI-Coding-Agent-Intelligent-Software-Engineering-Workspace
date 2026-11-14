@@ -817,7 +817,7 @@ async def _withdraw_open_swe_approvals(
                     scope_to_review_id=scope_to_review_id,
                 )
             )
-    except httpx2.HTTPError, ValueError:
+    except (httpx2.HTTPError, ValueError):
         logger.warning(
             "Could not list Open SWE approvals to withdraw",
             extra={"repository": f"{owner}/{repo}", "pr_number": pr_number},
@@ -849,7 +849,7 @@ async def _withdraw_open_swe_change_requests(
                     state="changes_requested",
                 )
             )
-    except httpx2.HTTPError, ValueError:
+    except (httpx2.HTTPError, ValueError):
         logger.warning(
             "Could not list Open SWE change requests to withdraw",
             extra={"repository": f"{owner}/{repo}", "pr_number": pr_number},

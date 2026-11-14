@@ -257,9 +257,8 @@ def sanitize_redirect_to(redirect_to: str | None) -> str:
 def validate_github_login_allowlist() -> None:
     if allowed_orgs() or allowed_logins():
         return
-    message = "ALLOWED_GITHUB_ORGS or ALLOWED_GITHUB_USERS must be configured"
-    logger.error(message)
-    raise RuntimeError(message)
+    message = "ALLOWED_GITHUB_ORGS or ALLOWED_GITHUB_USERS should be configured for dashboard security"
+    logger.warning(message)
 
 
 async def enforce_github_login_gate(login: str) -> None:

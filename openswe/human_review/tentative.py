@@ -71,7 +71,7 @@ class TentativeReviewers:
                 return await in_review_channel(
                     github.repo(pr.owner, pr.repo), request.slack_channel_id
                 )
-        except GitHubAppUnavailable, ReviewChannelUnknownError:
+        except (GitHubAppUnavailable, ReviewChannelUnknownError):
             logger.warning(
                 "Could not tell whether a posted pull request will be auto-assigned",
                 extra={"request_id": str(request.id)},

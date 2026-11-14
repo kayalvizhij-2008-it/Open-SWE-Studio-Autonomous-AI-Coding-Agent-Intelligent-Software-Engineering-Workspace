@@ -44,7 +44,7 @@ class MCPTransport(httpx2.AsyncBaseTransport):
             )
             try:
                 return await self._transport.handle_async_request(pinned)
-            except httpx2.ConnectError, httpx2.ConnectTimeout:
+            except (httpx2.ConnectError, httpx2.ConnectTimeout):
                 if index == len(public_ips) - 1:
                     raise
         raise httpx2.ConnectError("MCP server has no public addresses")

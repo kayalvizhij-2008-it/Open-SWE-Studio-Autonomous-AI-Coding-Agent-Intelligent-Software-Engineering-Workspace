@@ -91,7 +91,7 @@ class RequiredCheck:
         try:
             protection = _Branch.model_validate(await repo.branch(branch)).protection
             rules = _BRANCH_RULES.validate_python(await repo.branch_rules(branch))
-        except httpx2.HTTPError, ValueError, ValidationError:
+        except (httpx2.HTTPError, ValueError, ValidationError):
             logger.warning(
                 "Failed to read required checks",
                 extra={"repo_full_name": repo.full_name, "branch": branch},

@@ -854,7 +854,7 @@ class PullRequestClient:
                 extra={**self._log_extra, "graphql_errors": exc.errors},
             )
             return None
-        except httpx2.HTTPError, ValueError:
+        except (httpx2.HTTPError, ValueError):
             logger.warning(
                 "Mergeability query failed; falling back to what REST reported",
                 extra=self._log_extra,
@@ -933,7 +933,7 @@ class PullRequestClient:
                 cursor = _next_cursor(threads, seen_cursors)
                 if cursor is None:
                     return unresolved
-        except _CursorLoop, httpx2.HTTPError, ValueError:
+        except (_CursorLoop, httpx2.HTTPError, ValueError):
             return None
 
     async def review_state(self) -> ReviewState:
@@ -961,7 +961,7 @@ class PullRequestClient:
                 cursor = _next_cursor(threads, seen_cursors)
                 if cursor is None:
                     return ReviewState(unresolved, review_required)
-        except _CursorLoop, httpx2.HTTPError, ValueError:
+        except (_CursorLoop, httpx2.HTTPError, ValueError):
             return ReviewState(None, review_required)
 
     async def thread_status(self) -> dict[str, Any]:

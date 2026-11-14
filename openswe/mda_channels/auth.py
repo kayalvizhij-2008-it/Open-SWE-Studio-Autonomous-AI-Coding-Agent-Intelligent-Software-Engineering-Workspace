@@ -18,5 +18,5 @@ async def require_mda_channel(request: Request) -> None:
         if not secret:
             raise WebhookVerificationError
         Webhook(secret).verify(await request.body(), dict(request.headers))
-    except WebhookVerificationError, ValueError:
+    except (WebhookVerificationError, ValueError):
         raise HTTPException(status_code=401, detail="Invalid service credential") from None

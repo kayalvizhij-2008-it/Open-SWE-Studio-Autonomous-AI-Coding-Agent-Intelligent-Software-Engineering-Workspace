@@ -113,7 +113,7 @@ class SandboxFile:
                     exact=True,
                     icc_profile=image.info.get("icc_profile"),
                 )
-        except OSError, ValueError, Image.DecompressionBombError:
+        except (OSError, ValueError, Image.DecompressionBombError):
             return self
         webp = output.getvalue()
         if len(webp) >= len(self.content):

@@ -50,7 +50,7 @@ async def _read_text(
     async with semaphore:
         try:
             content = await repo.raw_file(path, ref)
-        except httpx2.HTTPError, UnsafeRepoPath:
+        except (httpx2.HTTPError, UnsafeRepoPath):
             logger.warning(
                 "diff file read failed",
                 extra={"repo_full_name": repo.full_name, "path": path, "ref": ref},

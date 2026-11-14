@@ -1,12 +1,15 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ArrowLeftIcon } from "@phosphor-icons/react/dist/ssr/ArrowLeft"
 import { CheckCircleIcon } from "@phosphor-icons/react/dist/ssr/CheckCircle"
+import { WarningCircleIcon } from "@phosphor-icons/react/dist/ssr/WarningCircle"
+import { ArrowClockwiseIcon } from "@phosphor-icons/react/dist/ssr/ArrowClockwise"
 import { GearIcon } from "@phosphor-icons/react/dist/ssr/Gear"
 import { ShieldCheckIcon } from "@phosphor-icons/react/dist/ssr/ShieldCheck"
 import { CpuIcon } from "@phosphor-icons/react/dist/ssr/Cpu"
 import { CloudIcon } from "@phosphor-icons/react/dist/ssr/Cloud"
 import FibreArc from "@/components/FibreArc"
 import { cn } from "@/lib/utils"
+import { checkBackendHealth } from "@/lib/api-base"
 import type { StudioTab } from "./StudioSidebar"
 
 interface StudioSettingsProps {
@@ -18,6 +21,36 @@ export function StudioSettings({ onNavigateTab }: StudioSettingsProps) {
   const [sandboxedExecution, setSandboxedExecution] = useState<boolean>(true)
   const [requirePrReview, setRequirePrReview] = useState<boolean>(true)
   const [allowExternalTools, setAllowExternalTools] = useState<boolean>(false)
+
+  const [healthStatus, setHealthStatus] = useState<{
+    ok: boolean
+    status: string
+    url: string
+    timestamp: string
+    checking: boolean
+  }>({
+    ok: true,
+    status: "healthy",
+    url: "/health",
+    timestamp: "Just now",
+    checking: false,
+  })
+
+  const runHealthCheck = async () => {
+    setHealthStatus((prev) => ({ ...prev, checking: true }))
+    const res = await checkBackendHealth()
+    setHealthStatus({
+      ok: res.ok,
+      status: res.status,
+      url: res.url,
+      timestamp: res.timestamp,
+      checking: false,
+    })
+  }
+
+  useEffect(() => {
+    void runHealthCheck()
+  }, [])
 
   return (
     <div className="space-y-6 pb-12">
@@ -260,19 +293,55 @@ export function StudioSettings({ onNavigateTab }: StudioSettingsProps) {
             </div>
           </div>
 
-          {/* All Systems Operational Card */}
+          {/* All Systems Operational Card with Live Health Monitoring */}
           <div className="studio-card p-6 flex flex-col items-center justify-center text-center space-y-3 bg-gradient-to-b from-[#141820] to-[#1B202A]">
-            <div className="flex size-14 items-center justify-center rounded-2xl bg-[#A8D96C]/10 border border-[#A8D96C]/30 text-[#A8D96C]">
-              <CheckCircleIcon size={32} weight="fill" />
+            <div
+              className={cn(
+                "flex size-14 items-center justify-center rounded-2xl border transition-colors",
+                healthStatus.ok
+                  ? "bg-[#A8D96C]/10 border-[#A8D96C]/30 text-[#A8D96C]"
+                  : "bg-amber-500/10 border-amber-500/30 text-amber-400"
+              )}
+            >
+              {healthStatus.ok ? (
+                <CheckCircleIcon size={32} weight="fill" />
+              ) : (
+                <WarningCircleIcon size={32} weight="fill" />
+              )}
             </div>
 
-            <div>
-              <h3 className="font-heading text-base font-bold text-[#A8D96C]">
-                All Systems Operational
+            <div className="w-full">
+              <h3
+                className={cn(
+                  "font-heading text-base font-bold",
+                  healthStatus.ok ? "text-[#A8D96C]" : "text-amber-400"
+                )}
+              >
+                {healthStatus.ok ? "All Systems Operational" : "Backend Reconnecting"}
               </h3>
               <p className="text-[11px] text-[#9A9DA6] mt-0.5">
-                Last checked: 2 min ago
+                Status: <span className="text-[#F4F0E8] font-mono">{healthStatus.status}</span>
               </p>
+              <p className="text-[10px] text-[#9A9DA6] mt-1 font-mono truncate max-w-full px-2" title={healthStatus.url}>
+                {healthStatus.url}
+              </p>
+              <div className="mt-3 flex items-center justify-center gap-2">
+                <span className="text-[10px] text-[#9A9DA6]">
+                  Checked: {healthStatus.timestamp}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => void runHealthCheck()}
+                  disabled={healthStatus.checking}
+                  className="flex items-center gap-1 text-[11px] font-medium text-[#FF7548] hover:text-[#F5B66B] disabled:opacity-50 transition-colors"
+                >
+                  <ArrowClockwiseIcon
+                    size={12}
+                    className={cn(healthStatus.checking && "animate-spin")}
+                  />
+                  <span>{healthStatus.checking ? "Checking..." : "Recheck"}</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

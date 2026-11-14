@@ -98,7 +98,7 @@ class FeaturedApps:
                     serve_stale=False,
                 ):
                     readable.append(name)
-            except HTTPException, GitHubError, GitHubSignInRequired:
+            except (HTTPException, GitHubError, GitHubSignInRequired):
                 # Shared on a later load, once GitHub answers.
                 logger.warning(
                     "Could not check a featured app's repository",

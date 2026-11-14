@@ -408,6 +408,9 @@ ENV.var(
     "POSTGRES_URI", "LangGraph deployment PostgreSQL URI available to custom code.", secret=True
 )
 ENV.var(
+    "DATABASE_URL", "Database connection string fallback for POSTGRES_URI.", secret=True, default=""
+)
+ENV.var(
     "LANGSMITH_LANGGRAPH_API_VARIANT",
     "LangGraph API runtime variant.",
     default="",

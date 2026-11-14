@@ -433,7 +433,7 @@ class MdaRuntime:
                 params={"action": "interrupt"},
                 headers=write.headers,
             )
-        except httpx.HTTPError, ChannelThreadError:
+        except (httpx.HTTPError, ChannelThreadError):
             logger.warning("Could not interrupt an MDA run", extra=extra, exc_info=True)
             return False
         if response.is_error:

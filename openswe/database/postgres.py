@@ -39,7 +39,7 @@ MIGRATION_LOCK = 557314367248862439
 
 
 def uri() -> str:
-    value = ENV.POSTGRES_URI.optional()
+    value = ENV.POSTGRES_URI.optional() or ENV.DATABASE_URL.optional() or os.environ.get("DATABASE_URL")
     if value is None and ENV.LANGSMITH_LANGGRAPH_API_VARIANT.get() == "local_dev":
         value = "postgresql://postgres:postgres@127.0.0.1:5433/postgres"
     if value is None:

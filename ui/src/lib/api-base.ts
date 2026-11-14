@@ -15,8 +15,11 @@ export function resolveDashboardApiBase(
 
 export function dashboardApiBase(): string {
   const protocol = typeof window === "undefined" ? "" : window.location.protocol
+  const configured =
+    import.meta.env.VITE_DASHBOARD_API_BASE_URL ||
+    import.meta.env.VITE_API_BASE_URL
   return resolveDashboardApiBase(
-    import.meta.env.VITE_DASHBOARD_API_BASE_URL,
+    configured,
     protocol,
     import.meta.env.BASE_URL
   )
@@ -37,5 +40,41 @@ export function isCrossOriginApiBase(
     return new URL(configured).origin !== requestOrigin
   } catch {
     return false
+  }
+}
+
+export async function checkBackendHealth(): Promise<{
+  ok: boolean
+  status: string
+  url: string
+  timestamp: string
+}> {
+  const base = dashboardApiBase()
+  const targetUrl = `${base}/health`
+  try {
+    const res = await fetch(targetUrl, { credentials: "include" })
+    if (res.ok) {
+      const data = (await res.json().catch(() => ({}))) as { status?: string }
+      return {
+        ok: true,
+        status: data.status || "healthy",
+        url: targetUrl,
+        timestamp: new Date().toLocaleTimeString(),
+      }
+    }
+    return {
+      ok: false,
+      status: `HTTP ${res.status}`,
+      url: targetUrl,
+      timestamp: new Date().toLocaleTimeString(),
+    }
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : "Connection failed"
+    return {
+      ok: false,
+      status: msg,
+      url: targetUrl,
+      timestamp: new Date().toLocaleTimeString(),
+    }
   }
 }

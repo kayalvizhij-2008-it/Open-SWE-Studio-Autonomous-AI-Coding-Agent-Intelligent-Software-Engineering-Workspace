@@ -261,7 +261,7 @@ class ThreadStore:
             # A run or an answer on a channel's thread: as its sender, in its conversation.
             try:
                 write = await RUNTIMES.mda_runtime.channel_write(thread_id, user_id=user_id)
-            except ChannelThreadError, httpx.HTTPError:
+            except (ChannelThreadError, httpx.HTTPError):
                 logger.warning(
                     "Can't act on an MDA channel's thread",
                     extra={"thread_id": thread_id},

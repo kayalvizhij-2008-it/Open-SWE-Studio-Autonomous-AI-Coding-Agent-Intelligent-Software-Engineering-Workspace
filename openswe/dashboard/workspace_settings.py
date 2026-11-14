@@ -795,7 +795,7 @@ class WorkspaceSettings(Mapping[str, Any]):
             try:
                 names = entry.get("repositories") or []
                 found[UUID(str(entry["app"]))] = tuple(str(name) for name in names)
-            except AttributeError, KeyError, TypeError, ValueError:
+            except (AttributeError, KeyError, TypeError, ValueError):
                 continue
         return found
 
@@ -805,7 +805,7 @@ class WorkspaceSettings(Mapping[str, Any]):
         for entry in value if isinstance(value, list) else []:
             try:
                 found[UUID(str(entry["app"]))] = UUID(str(entry["release"]))
-            except KeyError, TypeError, ValueError:
+            except (KeyError, TypeError, ValueError):
                 continue
         return found
 

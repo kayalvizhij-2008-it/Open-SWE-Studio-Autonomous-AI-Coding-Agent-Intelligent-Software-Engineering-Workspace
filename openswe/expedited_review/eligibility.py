@@ -197,7 +197,7 @@ class ChangedFile(BaseModel):
             return _CHANGED_FILES.validate_python(
                 await pull.files(max_pages=max_pages, count=count)
             )
-        except httpx2.HTTPError, ValueError, ValidationError:
+        except (httpx2.HTTPError, ValueError, ValidationError):
             logger.warning(
                 "Could not read the pull request's changed files",
                 extra={"repo_full_name": pull.repo.full_name, "pr_number": pull.number},

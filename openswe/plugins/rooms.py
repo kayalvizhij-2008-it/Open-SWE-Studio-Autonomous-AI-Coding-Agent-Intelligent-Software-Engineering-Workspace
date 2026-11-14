@@ -217,7 +217,7 @@ class RoomListener:
             event = json.loads(payload)
             room = str(event["room"])
             kind = str(event["kind"])
-        except ValueError, KeyError, TypeError:
+        except (ValueError, KeyError, TypeError):
             logger.warning("Ignored an unreadable plugin room notification")
             return
         self._publish(

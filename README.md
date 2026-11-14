@@ -1,95 +1,203 @@
-# Robin
+# Open SWE Studio 🚀
+### Autonomous AI Coding Agent | Intelligent Software Engineering Workspace
 
-<div align="center">
-  <h3>An open-source software factory built on Deep Agents by LangChain.</h3>
-</div>
+**Plan. Code. Execute. Validate. Deliver.**
 
-<div align="center">
-  <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/github/license/langchain-ai/open-swe" alt="License"></a>
-  <a href="https://github.com/langchain-ai/open-swe" target="_blank"><img src="https://img.shields.io/github/stars/langchain-ai/open-swe" alt="GitHub Stars"></a>
-  <a href="https://github.com/langchain-ai/deepagents" target="_blank"><img src="https://img.shields.io/badge/Built%20on-Deep%20Agents-blue" alt="Built on Deep Agents"></a>
-  <a href="https://github.com/langchain-ai/langgraph" target="_blank"><img src="https://img.shields.io/badge/Powered%20by-LangGraph-blue" alt="Powered by LangGraph"></a>
-  <a href="https://x.com/langchain" target="_blank"><img src="https://img.shields.io/twitter/url/https/twitter.com/langchain.svg?style=social&label=Follow%20%40LangChain" alt="Twitter / X"></a>
-</div>
+Open SWE Studio is a modern AI-powered software engineering workspace built around the Open SWE autonomous coding agent architecture. It provides an intuitive developer experience for delegating software engineering tasks to autonomous agents, monitoring execution, reviewing code changes, and managing development workflows.
 
-<br>
+Powered by **LangGraph and Deep Agents**, the project brings autonomous software development workflows into a visually immersive, interactive workspace.
 
-Robin turns engineering work into a repeatable system: investigate a codebase, implement changes, validate them, and deliver a pull request.
-It also reviews pull requests, learns repository-specific review preferences, monitors CI, and responds to feedback.
-Built by LangChain, it is open source and deployable in your infrastructure.
+---
 
-> [!NOTE]
-> **Under active development.**
-> Expect breaking changes and rough edges.
-> We’re not accepting issues or external contributions at this time.
-> You’re welcome to explore and fork the code, but correctness, stability, and compatibility are not guaranteed.
->
-> If you really want to deploy it yourself, follow the [installation guide](docs/INSTALLATION.md).
-> Deploying it as is requires [Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview), which runs its agent; without it, we recommend forking and adapting the code to your own runtime.
+## ✨ Vision
 
-## What Robin does
+Imagine describing a software engineering task in natural language and having an AI agent take responsibility for the development workflow.
 
-```mermaid
-flowchart LR
-    A[Issues, conversations, PRs, schedules] --> B[Plan and investigate]
-    B --> C[Implement in an isolated sandbox]
-    C --> D[Validate and deliver a PR]
-    D --> E[Review, CI, and feedback]
-    E -->|Follow-up work| B
+Open SWE Studio aims to make that experience more accessible through an integrated workspace where developers can initiate tasks, monitor agent activity, inspect code changes, and follow the journey from an engineering request to a potential pull request.
+
+Rather than being just another AI chatbot, it is designed around an agent-driven software engineering workflow.
+
+## 🎯 Core Capabilities
+
+### 🤖 Autonomous Coding Workflows
+- Delegate software engineering tasks to AI agents.
+- Leverage the existing Open SWE agent architecture.
+- Support repository-aware development workflows.
+- Track task execution and agent progress.
+
+### ⚡ Intelligent Agent Workspace
+- Interactive task execution interface.
+- Conversation-based development workflow.
+- Execution activity and progress visibility.
+- Context-aware task continuation where supported.
+
+### 🔍 Code Review & Pull Requests
+- Inspect generated code changes.
+- View repository and pull request information where available.
+- Monitor review and validation workflows.
+- Connect development tasks with GitHub workflows.
+
+### 📂 Repository & Workspace Management
+- Explore connected repositories.
+- Organize development workspaces.
+- Access repository-specific context.
+- Configure supported integrations.
+
+### 📊 Development Mission Control
+- Centralized execution overview.
+- Recent task activity.
+- Agent run history.
+- Repository and workflow visibility.
+
+### 🎨 Immersive Developer Experience
+- Premium dark interface.
+- Custom shader-based Fibre Arc WebGL animation.
+- Interactive visual elements.
+- Responsive layouts and modern navigation.
+- Consistent visual experience across application pages.
+
+---
+
+## 🧠 Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| LangGraph | Agent orchestration |
+| Deep Agents | Autonomous coding workflows |
+| Python | Backend implementation |
+| FastAPI | Backend API |
+| TypeScript | Frontend development |
+| React | User interface |
+| Vite | Frontend tooling |
+| Tailwind CSS | Interface styling |
+| WebGL / GLSL | Fibre Arc visual experience |
+| GitHub | Repository and development workflows |
+
+*The exact technologies and integrations depend on the upstream Open SWE version and project configuration.*
+
+---
+
+## 🏗️ Architecture
+
+Open SWE Studio builds its experience around the original Open SWE architecture.
+
+**High-level workflow:**
+
+1. **Task Input** – A developer describes the required engineering task.
+2. **Agent Orchestration** – The existing agent runtime processes the request.
+3. **Repository Context** – The agent works with the configured repository and development environment.
+4. **Execution** – Supported tools and sandbox environments perform development operations.
+5. **Validation** – Available checks and execution results are evaluated.
+6. **Delivery** – Results, code changes and pull request information are surfaced in the workspace where supported.
+
+The original backend architecture and API contracts are preserved rather than replaced with simulated functionality.
+
+---
+
+## 🎨 Design Philosophy
+
+Open SWE Studio combines engineering functionality with an immersive visual identity.
+
+- Midnight charcoal surfaces.
+- Copper-orange and warm amber highlights.
+- Carefully layered dashboard components.
+- Custom Fibre Arc shader animation.
+- Clear information hierarchy.
+- Responsive developer-focused layouts.
+
+The visual system is designed to communicate intelligence, precision and continuous execution.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/kayalvizhij-2008-it/Open-SWE-Studio-Autonomous-AI-Coding-Agent-Intelligent-Software-Engineering-Workspace.git
+cd Open-SWE-Studio-Autonomous-AI-Coding-Agent-Intelligent-Software-Engineering-Workspace
 ```
 
-- **Build:** Investigate repositories, edit code, run focused validation, and open or update pull requests.
-- **Parallelize:** Use subagents for research and independent work.
-- **Review:** Run on-demand or opt-in automatic reviews, publish findings to GitHub, and learn from historical feedback.
-- **Investigate:** Use read-only PR chat to understand a change without implementing changes.
-- **Operate:** Schedule recurring tasks and monitor opted-in PRs with `/baby-sit`, diagnosing failures and rerunning only evidence-backed flaky jobs.
-- **Customize:** Choose models, reasoning effort, instructions, skills, integrations, and sandbox providers.
+### 2. Install dependencies
 
-Start and continue work from the **dashboard**, **GitHub issues and PR conversations**, or **Slack**.
-In [Linear](docs/INSTALLATION.md#linear), mention or delegate an issue to the Robin app to open an agent session.
-Cloud coding follow-ups reuse the thread’s context and sandbox; independent threads can run in parallel.
+```bash
+# Frontend Studio dependencies
+cd ui
+pnpm install
 
-## How it works
+# Root dependencies
+pnpm install
+```
 
-[Deep Agents](https://github.com/langchain-ai/deepagents) supplies planning, filesystem, shell, skills, and subagent primitives.
-[LangGraph](https://github.com/langchain-ai/langgraph) provides durable execution and thread state.
-Robin adds engineering tools, integrations, authorization, and user interfaces.
-The graph entrypoints are declared in [`langgraph.json`](langgraph.json), with an [architecture inventory](AGENTS.md#architecture).
+### 3. Configure environment variables
 
-Cloud coding runs in persistent, per-thread Linux sandboxes with tooling supplied by workspace scripts or snapshots.
-An unreachable coding sandbox is not silently replaced.
-[LangSmith](https://smith.langchain.com/) is the default sandbox and tracing provider; [other providers and local execution](docs/CUSTOMIZATION.md#1-sandbox) are configurable.
-PR chat does not need a sandbox.
+Configure the required credentials and services using the upstream environment setup instructions.
 
-## Control and safety
+Depending on the deployment, this may include:
+- Model provider credentials.
+- GitHub App configuration.
+- Managed Deep Agents / LangGraph configuration.
+- Sandbox provider credentials.
+- Optional integrations.
 
-- **GitHub access:** Coding sandboxes normally receive installation-wide GitHub App access; selected workflows use narrower repository scopes.
-  Workspace repository bindings control routing and preloaded checkouts, not a separate credential boundary.
-  See [GitHub access](docs/reference/workspaces.md#github-access-and-the-sandbox-image).
-- **Integrations:** MCP connections layer instance-wide, workspace-specific, and personal tools.
-  Configure their scope and credentials in the [customization guide](docs/CUSTOMIZATION.md#workspace-mcp-servers).
-- **Approvals:** Workflow-file approval prompts guard detected Git pushes, not every possible shell or API write.
-  Reviewers are instructed not to commit or push; PR chat excludes mutation tools.
+Never commit `.env` files or secrets.
 
-Sandboxes have powerful tools and may have network access.
-Use least-privilege credentials, restrict repositories and integrations, and tailor approval policies to your deployment.
-Local execution does not provide cloud sandbox isolation.
+### 4. Start the application
 
-## Documentation
+#### Studio UI Development Server
+```bash
+cd ui
+pnpm dev
+```
+Open your browser at `http://localhost:3000` (or `http://localhost:5173`) to launch the Open SWE Studio interface with the Fibre Arc 3D visualization.
 
-- [Robin rollout checklist](docs/ROBIN_ROLLOUT.md) — External integration updates, desktop upgrade checks, and compatibility boundaries
-- [Customization guide](docs/CUSTOMIZATION.md) — Models, sandboxes, tools, skills, prompts, triggers, and middleware
-- [Plugin guide](docs/PLUGINS.md) — Build web apps: sandboxed single-file plugins people add to their sidebar
-- [Workspaces reference](docs/reference/workspaces.md) — Routing, settings, images, and access
-- [Human review in Slack](docs/reference/human-review.md) — Review requests in a repository's Slack channel, merged once reviewers approve
-- [Expedited Slack review](docs/reference/expedited-slack-review.md) — Human approval for small pull requests
-- [Backend API documentation](docs/DEVELOPMENT.md#backend-api-documentation) — Live API docs and the generated [OpenAPI schema](swagger.json)
-- [Original announcement](https://blog.langchain.com/open-swe-an-open-source-framework-for-internal-coding-agents/) — Background on the internal coding-agent framework
-- [Security policy](SECURITY.md) — Report security concerns privately
+#### Backend Agent Services
+```bash
+# Run backend LangGraph / Python services
+pnpm start
+```
 
-## License
+---
 
-Robin is licensed under the [MIT License](LICENSE).
+## 🔐 Security & Reliability
 
-That license covers Robin's own code only.
-It does not cover anything under [`vendor/`](vendor/README.md), which is not licensed by this repository at all.
+- Preserve existing authentication and authorization.
+- Keep credentials on the server side.
+- Use configured sandbox environments for agent execution.
+- Respect repository permissions.
+- Avoid exposing private environment variables.
+- Clearly distinguish unavailable integrations from operational features.
+
+---
+
+## 🌟 Project Goals
+
+Open SWE Studio explores how autonomous AI agents can improve software engineering workflows.
+
+Its broader goals include:
+
+- Reducing repetitive development tasks.
+- Making AI-assisted coding workflows more transparent.
+- Improving visibility into autonomous execution.
+- Simplifying repository-aware task delegation.
+- Creating a unified interface for AI-driven engineering operations.
+
+---
+
+## 🔗 Original Project
+
+**Open SWE by LangChain**
+
+https://github.com/langchain-ai/open-swe
+
+Open SWE Studio is a frontend-focused project built around the upstream Open SWE architecture. It is an independent presentation and development experience, not an official LangChain product.
+
+---
+
+## 👩‍💻 Project
+
+**Open SWE Studio**
+
+*Where autonomous intelligence meets modern software engineering.*
+
+**Plan smarter. Build faster. Ship with confidence.**
